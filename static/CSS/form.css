@@ -1,0 +1,21 @@
+
+
+h1{
+    text-align:center;
+    color:blue;
+}
+
+h2{
+    text-align:center;
+    color:red;
+}
+hr{
+    color: blue;
+}
+body{
+
+    background :gray;
+    color : red;
+    background-repeat:no-repeat;
+    background-size : cover;
+}

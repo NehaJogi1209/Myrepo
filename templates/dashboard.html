@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{%load staticfiles%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Djangio Rest Framework - Select Country/State/City</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static "CSS/form.css" %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function()
+        {
+         var       $countryvar = $("#countryid");
+         var       $statevar = $("#stateid");
+         var       $cityvar = $("#cityid");
+         var       $state_options = $statevar.find('option');
+         var       $city_options = $cityvar.find('option');
+
+          $countryvar.on('change',function()
+                {
+                   $statevar.html($state_options.filter('[value="'+this.value+'"]'));
+                }).trigger('change');
+
+
+<!--window.location.href="redirect.html";-->
+
+          $statevar.on('change',function()
+                {
+                    $cityvar.html($city_options.filter('[value="'+this.value+'"]'));
+                }).trigger('change');
+
+        });
+
+
+    </script>
+</head>
+<body>
+    <center><H1>Please Select Specific Country/State/City</H1>
+    <hr>
+        <div class="container", align="center">
+        <div style="width: 100%; display: inline-flex;">
+        <div style="width: 30%;">
+        <select id = "countryid">
+            <option selected disabled="true">---Select Country---</option>
+            {% for country in countrydata%}
+            <option value="{{country.cid}}">{{country.cname}}</option>
+            {% endfor %}
+        </select>
+        </div>
+
+
+        <div style="width: 30%;">
+        <select id="stateid">
+            <option selected disabled="true">---Select State---</option>
+            {% for state in statedata%}
+                {
+                <option  value="{{state.country}}" data-sync="{{state.sid}}">{{state.state}}</option>
+            {% endfor %}
+        </select>
+        </div>
+
+
+        <div style="width: 30%;">
+        <select id="cityid">
+            <option selected disabled="true">---Select City---</option>
+            {% for city in citydata%}
+            <option value="{{city.state}}" data-sync="{{city.ctid}}">{{city.city}}</option>
+            {% endfor %}
+        </select>
+        </div>
+</div>
+        </div>
+
+    </center>
+</body>
+</html>
